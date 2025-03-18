@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Disease Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #image-preview { width: 300px; height: 300px; object-fit: cover; margin: 10px auto; display: block; }
+        #result { font-size: 20px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Chicken Disease Identification</h1>
+    <p>Upload an image of chicken feces to identify if it is healthy or affected by coccidiosis.</p>
+    
+    <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+    <br>
+    <img id="image-preview" src="#" alt="Image Preview" style="display:none;">
+    <br>
+    <button onclick="predictDisease()">Predict</button>
+    
+    <p id="result"></p>
+    
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('image-preview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        async function predictDisease(image, event) {
+            const resultText = document.getElementById('result');
+            resultText.innerText = "Processing...";
+            
+            // Simulated prediction logic (Replace with actual ML API call)
+            setTimeout(() => {
+                const predictions = ["Healthy", "Coccidiosis"];
+                const randomIndex = Math.floor(Math.random() * predictions.length);
+                resultText.innerText = "Prediction: " + predictions[randomIndex];
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
